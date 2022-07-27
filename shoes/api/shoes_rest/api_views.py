@@ -4,7 +4,7 @@ from django.views.decorators.http import require_http_methods
 import json
 
 from common.json import ModelEncoder
-from .models import Bin, Shoe
+from .models import Shoe, BinVO
 
 class ShoeListEncoder(ModelEncoder):
     model = Shoe
@@ -26,12 +26,13 @@ def api_list_shoes(request):
         )
     else:
         content = json.loads(request.body)
+
         try:
-            bin = Bin.objects.get(id=content["bin"])
+            bin = BinVO.objects.get(id=content["bin"])
             content["bin"] = bin
-        except Shoe.DoesNotExist:
+        except BinVO.DoesNotExist:
             return JsonResponse(
-                {"message":"Invalid Shoe ID"},
+                {"message": "Invalid location id"},
                 status=400,
             )
         shoe = Shoe.objects.create(**content)
@@ -40,9 +41,26 @@ def api_list_shoes(request):
             encoder=ShoeListEncoder,
             safe=False,
         )
+
+@require_http_methods(["DELETE", "GET", "PUT"])
 def api_show_shoes(request, pk):
-    shoe = Shoe.objects.get(id=pk)
-    return JsonResponse(
-        shoe,
-        encoder=ShoeDetailEncoder
-    )
+    if request.method == "GET":
+        shoe = Shoe.objects.get(id=pk)
+        return JsonResponse(
+            {"shoe": shoe},
+            encoder=ShoeDetailEncoder,
+        )
+    elif request.method == "DELETE":
+        try:
+            shoe = Shoe.objects.get(id=pk)
+            shoe.delete()
+            return JsonResponse(
+                shoe,
+                encoder=ShoeDetailEncoder,
+                safe=False,
+            )
+        except Shoe.DoesNotExist:
+            return JsonResponse(
+                {"message":"Shoe does not exist"},
+                status=400,
+                )
