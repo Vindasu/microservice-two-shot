@@ -12,6 +12,7 @@ class Shoe(models.Model):
     bin = models.ForeignKey(
         Bin,
         related_name="shoes",
-        on_delete=models.CASCADE,
+        on_delete=models.CASCADE,null = True,
+        blank = True,
     )
 
