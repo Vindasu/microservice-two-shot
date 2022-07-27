@@ -11,10 +11,10 @@ django.setup()
 
 # Import models from hats_rest, here.
 
-from api.hats_rest.models import LocationVO
+from hats_rest.models import LocationVO
 
 def get_locations():
-    response = requests.get("http://wardrobe:8100/locations/")
+    response = requests.get("http://wardrobe-api:8000/api/locations/")
     content = json.loads(response.content)
     for location in content["locations"]:
         LocationVO.objects.update_or_create(

@@ -26,12 +26,13 @@ SECRET_KEY = 'django-insecure-octnr2p$zuhnw6l6$k*1c$ggb_sg#awm-tv8kqj6+!-fttfo()
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "wardrobe-api"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    # "django_crontab",
     "hats_rest.apps.HatsApiConfig",
     "corsheaders",
     'django.contrib.admin',
