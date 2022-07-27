@@ -1,6 +1,7 @@
 from django.db import models
 # Create your models here.
 class BinVO(models.Model):
+    import_href = models.CharField(max_length=200, unique=True)
     closet_name = models.CharField(max_length=100, null=True, blank=True)
 
 class Shoe(models.Model):
