@@ -8,11 +8,19 @@ from .models import Shoe, BinVO
 
 class ShoeListEncoder(ModelEncoder):
     model = Shoe
-    properties = ["model_name", "href"]
+    properties = ["model_name"]
+
+class BinVOEncoder(ModelEncoder):
+    model = BinVO
+    properties = ["import_href"]
+    
+    def get_extra_data(self, o):
+        return {"bin": o.closet_name}
 
 class ShoeDetailEncoder(ModelEncoder):
     model = Shoe
     properties = ["manufacturer", "model_name", "color", "picture_url"]
+    encoders={"bin": BinVOEncoder}
 
 
 
@@ -35,7 +43,7 @@ def api_list_shoes(request, bin_vo_id=None):
             content["bin"] = bin
         except BinVO.DoesNotExist:
             return JsonResponse(
-                {"message": "Invalid location id"},
+                {"message": "Invalid bin id"},
                 status=400,
             )
         shoe = Shoe.objects.create(**content)
@@ -51,7 +59,6 @@ def api_show_shoes(request, pk):
         try:
             shoe = Shoe.objects.get(id=pk)
             return JsonResponse(
-                shoe,
                 {"shoe": shoe},
                 encoder=ShoeDetailEncoder,
                 safe=False,
