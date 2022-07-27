@@ -16,12 +16,16 @@ django.setup()
 from shoes_rest.models import BinVO
 
 def get_bins():
-    response = requests.get("http://wardrobe:8100/bins/")
+    response = requests.get("http://wardrobe-api:8000/api/bins/")
     content = json.loads(response.content)
     for bin in content["bins"]:
         BinVO.objects.update_or_create(
             import_href=bin["href"],
-            defaults={"closet_name": bin["closet_name"]}
+            defaults={
+            "closet_name": bin["closet_name"],
+            "bin_number": bin["bin_number"],
+            "shelf_number": bin["shelf_number"]
+            }
         )
 def poll():
     while True:
