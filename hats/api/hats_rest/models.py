@@ -8,7 +8,7 @@ class Location(models.Model):
     # def get_api_url(self):
     #     return reverse("api_show_location", kwargs={"pk": self.pk})
 
-class Hat(models.Modle):
+class Hat(models.Model):
     fabric = models.CharField(max_length=200, null=True, blank=True)
     style_name = models.CharField(max_length=200, null=True, blank=True)
     color = models.CharField(max_length=200, null=True, blank=True)
