@@ -16,7 +16,7 @@ class Hat(models.Model):
     picture_url = models.URLField(null=True, blank=True)
     location = models.ForeignKey(
         LocationVO,
-        related_name="locations",
+        related_name="hats",
         on_delete=models.CASCADE,
         null=True,
         blank=True,
