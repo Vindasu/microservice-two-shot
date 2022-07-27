@@ -6,3 +6,11 @@ class Shoe(models.model):
     model_name = models.CharField(max_length=200, null=True, blank = True)
     color = models.CharField(max_length=200, null=True, blank = True)
     picture_url = models.URLfield(null=True)
+    bin = models.ForeignKey(
+        Bin,
+        related_name="shoes",
+        on_delete=models.CASCADE,
+    )
+
+class Bin(models.model):
+    name = models.CharField(max_length=200)
