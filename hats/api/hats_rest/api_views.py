@@ -4,7 +4,7 @@ from django.views.decorators.http import require_http_methods
 import json
 from common.json import ModelEncoder
 
-from .models import Hat
+from .models import Hat, LocationVO
 
 # Create your views here.
 
