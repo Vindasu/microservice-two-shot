@@ -1,7 +1,10 @@
 from django.db import models
 
 # Create your models here.
-class Shoe(models.model):
+class Bin(models.Model):
+    name = models.CharField(max_length=200)
+    
+class Shoe(models.Model):
     manufacturer = models.CharField(max_length=200, null=True, blank = True)
     model_name = models.CharField(max_length=200, null=True, blank = True)
     color = models.CharField(max_length=200, null=True, blank = True)
@@ -12,5 +15,3 @@ class Shoe(models.model):
         on_delete=models.CASCADE,
     )
 
-class Bin(models.model):
-    name = models.CharField(max_length=200)
