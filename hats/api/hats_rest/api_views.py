@@ -8,7 +8,7 @@ from .models import Hat, LocationVO
 
 # Create your views here.
 
-class HatEncoder(ModelEncoder):
+class HatListEncoder(ModelEncoder):
     model = Hat
     properties = [
         "id",
@@ -26,19 +26,22 @@ class HatEncoder(ModelEncoder):
 #     ]
 
 @require_http_methods(["GET", "POST"])
-def api_hats(request):
+def api_list_hats(request, location_vo_id=None):
     if request.method == "GET":
-        hats = Hat.objects.all()
+        if location_vo_id is not None:
+            hats = Hat.objects.filter(location=location_vo_id)
+        else:
+            hats = Hat.objects.all()
         return JsonResponse(
             {"hats": hats},
-            encoder=HatEncoder,
+            encoder=HatListEncoder,
         )
     else:
         content = json.loads(request.body)
         hat = Hat.objects.create(**content)
         return JsonResponse(
             hat,
-            encoder=HatEncoder,
+            encoder=HatListEncoder,
             safe=False,
         )
 
@@ -49,7 +52,7 @@ def api_hat(request, pk):
             hat = Hat.objects.get(id=pk)
             return JsonResponse(
                 hat,
-                encoder=HatEncoder,
+                encoder=HatListEncoder,
                 safe=False,
             )
         except Hat.DoesNotExist:
@@ -62,7 +65,7 @@ def api_hat(request, pk):
             hat.delete()
             return JsonResponse(
                 hat,
-                encoder=HatEncoder,
+                encoder=HatListEncoder,
                 safe=False,
             )
         except Hat.DoesNotExist:
@@ -79,7 +82,7 @@ def api_hat(request, pk):
             hat.save()
             return JsonResponse(
                 hat,
-                encoder=HatEncoder,
+                encoder=HatListEncoder,
                 safe=False,
             )
         except Hat.DoesNotExist:
