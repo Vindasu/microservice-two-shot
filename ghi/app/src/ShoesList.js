@@ -1,26 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import App from './App';
 import {useState} from 'react'
 
-// async function loadShoes() {
-// const response = await fetch('http://localhost:8080/api/shoes_rest/');
-// if (response.ok) {
+// async function loadHats() {
+//   
+//   if (response.ok) {
 //     const data = await response.json();
 //     root.render(
-//     <React.StrictMode>
-//         <App shoes={data.shoes} />
+//       <React.StrictMode>
+//         <App hats={data.hats} />
 
-//     </React.StrictMode>
+//       </React.StrictMode>
 //     );
-// } else {
+//   } else {
 //     console.error(response);
+//   }
 // }
-// }
-// loadShoes();
-
+// loadHats();
 
 function ShoesList() {
     const [shoes, setShoes] = useState([])
+
+    const fetchShoes = async () => {
+        const url = 'http://localhost:8080/api/shoes_rest/'
+        const res = await fetch(url)
+        const shoesJSON = await res.json()
+        setShoes(shoesJSON.shoes)
+    }
+    useEffect(() => {
+        fetchShoes()
+    }, [])
+
     return (
         <table className="table table-striped">
             <thead>
@@ -40,7 +50,7 @@ function ShoesList() {
                     <td>{ shoe.model_name }</td>
                     <td>{ shoe.color }</td>
                     <td>
-                    <img src={shoe.picture_url} className="" alt= "..."></img>
+                    <img src={shoe.picture_url} className="" alt= "..." width="100" height="100"></img>
                     </td>
                     <td>{ shoe.bin }</td>
                 </tr>
@@ -52,3 +62,4 @@ function ShoesList() {
 }
 
 export default ShoesList;
+
