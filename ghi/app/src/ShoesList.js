@@ -1,32 +1,26 @@
 import React from 'react';
 import App from './App';
-import ReactDOM from 'react-dom/client';
+import {useState} from 'react'
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-    <React.StrictMode>
-    <App />
-    </React.StrictMode>
-);
+// async function loadShoes() {
+// const response = await fetch('http://localhost:8080/api/shoes_rest/');
+// if (response.ok) {
+//     const data = await response.json();
+//     root.render(
+//     <React.StrictMode>
+//         <App shoes={data.shoes} />
 
-async function loadShoes() {
-const response = await fetch('http://localhost:8080/api/shoes_rest/');
-if (response.ok) {
-    const data = await response.json();
-    root.render(
-    <React.StrictMode>
-        <App shoes={data.shoes} />
-
-    </React.StrictMode>
-    );
-} else {
-    console.error(response);
-}
-}
-loadShoes();
+//     </React.StrictMode>
+//     );
+// } else {
+//     console.error(response);
+// }
+// }
+// loadShoes();
 
 
-function ShoesList(props) {
+function ShoesList() {
+    const [shoes, setShoes] = useState([])
     return (
     <table className="table table-striped">
         <thead>
@@ -39,7 +33,7 @@ function ShoesList(props) {
         </tr>
         </thead>
         <tbody>
-        {props.shoes.map(shoe => {
+        {shoes.map(shoe => {
             return (
             <tr key={shoe.id}>
                 <td>{ shoe.manufacturer }</td>
