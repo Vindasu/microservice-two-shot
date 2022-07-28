@@ -40,6 +40,7 @@ function ShoesList() {
                 <th>Shoe Color</th>
                 <th>Shoe Picture</th>
                 <th>Bins</th>
+                <th>Delete</th>
             </tr>
             </thead>
             <tbody>
@@ -53,6 +54,7 @@ function ShoesList() {
                     <img src={shoe.picture_url} className="" alt= "..." width="100" height="100"></img>
                     </td>
                     <td>{ shoe.bin }</td>
+                    <td>Delete</td>
                 </tr>
                 );
             })}
