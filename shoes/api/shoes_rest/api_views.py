@@ -14,6 +14,7 @@ from .models import Shoe, BinVO
 class ShoeListEncoder(ModelEncoder):
     model = Shoe
     properties = [
+        "id",
         "manufacturer",
         "model_name",
         "color",

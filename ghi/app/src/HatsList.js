@@ -39,7 +39,7 @@ export default () => {
             </td> */}
               <td>{ hat.picture_url }</td>
               <td>{ hat.location }</td>
-              <td>Delete</td>
+              <td><button className="btn btn-danger">Delete</button></td>
             </tr>
           );
         })}
