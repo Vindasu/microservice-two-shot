@@ -1,5 +1,6 @@
 import React from 'react';
 import { renderMatches } from 'react-router-dom';
+import HatsList from './HatsList';
 
 class HatForm extends React.Component {
     constructor(props) {
