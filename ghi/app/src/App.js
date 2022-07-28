@@ -22,6 +22,9 @@ function App(props) {
         <Routes>
           <Route path="/hats/new" element={<HatForm />} />
         </Routes>
+        <Routes>
+          <Route path="/shoes/new" element={<ShoeForm />} />
+        </Routes>
       </div>
     </BrowserRouter>
   );

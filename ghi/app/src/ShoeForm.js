@@ -110,7 +110,7 @@ class ShoeForm extends React.Component {
                 <div className="mb-3">
                     <select value={this.state.bin} onChange={this.handleBinChange} required name="bin" id="bin" className="form-select">
                     <option value="">Choose a bin</option>
-                    {this.state.locations.map(bin => {
+                    {this.state.bins.map(bin => {
                         return (
                         <option key={bin.id} value={bin.href}>
                             {bin.closet_name}
