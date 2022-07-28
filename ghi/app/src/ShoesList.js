@@ -1,3 +1,31 @@
+import React from 'react';
+import App from './App';
+import ReactDOM from 'react-dom/client';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+    <React.StrictMode>
+    <App />
+    </React.StrictMode>
+);
+
+async function loadShoes() {
+const response = await fetch('http://localhost:8080/api/shoes_rest/');
+if (response.ok) {
+    const data = await response.json();
+    root.render(
+    <React.StrictMode>
+        <App shoes={data.shoes} />
+
+    </React.StrictMode>
+    );
+} else {
+    console.error(response);
+}
+}
+loadShoes();
+
+
 function ShoesList(props) {
     return (
     <table className="table table-striped">
