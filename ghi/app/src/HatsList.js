@@ -17,7 +17,6 @@ function HatsList() {
       method: "delete",
     };
     const response = await fetch(url, fetchConfig);
-    // find hat by id and remove from hats array
     setHats(hats.filter(function(hat) {
       return hat.id !== id;
     }))
