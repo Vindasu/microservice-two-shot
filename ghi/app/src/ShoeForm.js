@@ -39,7 +39,7 @@ class ShoeForm extends React.Component {
                 model_name: '',
                 color: '',
                 picture_url: '',   
-                bins: [],
+                bin: '',
             };
             this.setState(cleared);
         }
@@ -67,9 +67,6 @@ class ShoeForm extends React.Component {
 
     handleBinChange(event) {
         const value = event.target.value;
-        console.log("event: ", event);
-        console.log("event.target: ", event.target);
-        console.log("value: ", value);
         this.setState({bin: value})
     }
 
