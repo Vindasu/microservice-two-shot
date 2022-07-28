@@ -17,7 +17,9 @@ function ShoesList(props) {
                 <td>{ shoe.manufacturer }</td>
                 <td>{ shoe.model_name }</td>
                 <td>{ shoe.color }</td>
-                <td>{ shoe.picture_url }</td>
+                <td>
+                <img src={hat.picture_url} className="" alt= "..."></img>
+                </td>
                 <td>{ shoe.bin }</td>
             </tr>
             );
