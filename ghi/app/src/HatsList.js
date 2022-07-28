@@ -17,7 +17,9 @@ function HatsList(props) {
                 <td>{ hat.fabric }</td>
                 <td>{ hat.style_name }</td>
                 <td>{ hat.color }</td>
-                <td>{ hat.picture_url }</td>
+                <td>
+                <img src={hat.picture_url} className="" alt= "..."></img>
+                </td>
                 <td>{ hat.location }</td>
               </tr>
             );

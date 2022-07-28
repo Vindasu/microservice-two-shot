@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 import json
+from .acls import get_photo
 from common.json import ModelEncoder
 
 from .models import Hat, LocationVO
@@ -48,7 +49,6 @@ def api_list_hats(request, location_vo_id=None):
     else:
         content = json.loads(request.body)
         try:
-            # location_href = f"/api/locations/{location_vo_id}/"
             location = LocationVO.objects.get(import_href=content["location"])
             content["location"] = location
         except LocationVO.DoesNotExist:
@@ -56,6 +56,8 @@ def api_list_hats(request, location_vo_id=None):
                 {"message": "Invalid location id"},
                 status=400,
             )
+        photo = get_photo(content["fabric"], content["style_name"])
+        content.update(photo)
         hat = Hat.objects.create(**content)
         return JsonResponse(
             hat,

@@ -15,7 +15,7 @@ class ShoeForm extends React.Component {
         this.handleModelNameChange = this.handleModelNameChange.bind(this);
         this.handleColorChange = this.handleColorChange.bind(this);
         this.handlePictureUrlChange = this.handlePictureUrlChange.bind(this);
-        this.handleBin = this.handleBinChange.bind(this);
+        this.handleBinChange = this.handleBinChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -99,10 +99,10 @@ class ShoeForm extends React.Component {
                     <input value={this.state.color} onChange={this.handleColorChange} placeholder="Color" required type="text" name="color" id="color" className="form-control" />
                     <label htmlFor="color">Color</label>
                 </div>
-                <div className="form-floating mb-3">
+                {/* <div className="form-floating mb-3">
                     <input value={this.state.picture_url} onChange={this.handlePictureUrlChange} placeholder="Picture URL" required type="text" name="picture_url" id="picture_url" className="form-control" />
                     <label htmlFor="picture_url">Picture URL</label>
-                </div>
+                </div> */}
                 <div className="mb-3">
                     <select value={this.state.bin} onChange={this.handleBinChange} required name="bin" id="bin" className="form-select">
                     <option value="">Choose a bin</option>

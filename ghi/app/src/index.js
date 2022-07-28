@@ -17,6 +17,7 @@ async function loadHats() {
     root.render(
       <React.StrictMode>
         <App hats={data.hats} />
+
       </React.StrictMode>
     );
   } else {
@@ -24,3 +25,21 @@ async function loadHats() {
   }
 }
 loadHats();
+
+async function loadShoes() {
+  const response = await fetch('http://localhost:8080/api/shoes_rest/');
+  if (response.ok) {
+    const data = await response.json();
+    console.log("data: ", data);
+    root.render(
+      <React.StrictMode>
+        <App shoes={data.shoes} />
+
+      </React.StrictMode>
+    );
+  } else {
+    console.error(response);
+  }
+}
+loadShoes();
+

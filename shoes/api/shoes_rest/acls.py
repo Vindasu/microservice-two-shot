@@ -2,13 +2,13 @@ import json
 import requests
 import os
 
-PEXELS_API_KEY = os.environ["563492ad6f9170000100000100fd1cf27ef04028b644ddf29c85f746"]
+PEXELS_API_KEY = os.environ["PEXELS_API_KEY"]
 
-def get_photo(city, state):
+def get_photo(manufacturer, model_name):
     headers = {"Authorization": PEXELS_API_KEY}
     params = {
         "per_page": 1,
-        "query": f"downtown {city} {state}",
+        "query": f"{manufacturer} {model_name}",
     }
     url = "https://api.pexels.com/v1/search"
     response = requests.get(url, params=params, headers=headers)

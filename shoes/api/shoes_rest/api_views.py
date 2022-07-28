@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
+from .acls import get_photo
 import json
 
 from common.json import ModelEncoder
@@ -46,12 +47,15 @@ def api_list_shoes(request, bin_vo_id=None):
                 {"message": "Invalid bin id"},
                 status=400,
             )
+        photo = get_photo(content["model_name"], content["manufacturer"])
+        content.update(photo)
         shoe = Shoe.objects.create(**content)
         return JsonResponse(
             shoe,
             encoder=ShoeListEncoder,
             safe=False,
         )
+
 
 @require_http_methods(["DELETE", "GET", "PUT"])
 def api_show_shoes(request, pk):
