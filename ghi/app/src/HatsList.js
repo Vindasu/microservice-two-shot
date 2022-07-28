@@ -50,5 +50,5 @@ function HatsList() {
   );
 }
   
-  export default HatsList;
+export default HatsList;
   
