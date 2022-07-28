@@ -83,7 +83,6 @@ class ShoeForm extends React.Component {
         }
     }
 
-    
     render() {
         return (
         <div className="row">
@@ -92,8 +91,8 @@ class ShoeForm extends React.Component {
                 <h1>Create a new shoe</h1>
                 <form onSubmit={this.handleSubmit} id="create-shoe-form">
                 <div className="form-floating mb-3">
-                    <input value={this.state.fabric} onChange={this.handleManufacturerChange} placeholder="Manufacturer" required type="text" name="manufacturer" id="manufacturer" className="form-control" />
-                    <label htmlFor="fabric">Fabric</label>
+                    <input value={this.state.manufacturer} onChange={this.handleManufacturerChange} placeholder="Manufacturer" required type="text" name="manufacturer" id="manufacturer" className="form-control" />
+                    <label htmlFor="Manufacturer">Manufacturer</label>
                 </div>
                 <div className="form-floating mb-3">
                     <input value={this.state.style_name} onChange={this.handleModelNameChange} placeholder="Model name" required type="text" name="model_name" id="model_name" className="form-control" />

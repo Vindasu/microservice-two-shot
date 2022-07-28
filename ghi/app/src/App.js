@@ -31,19 +31,3 @@ function App(props) {
 }
 
 export default App;
-
-// function App2() {
-//   return (
-//     <BrowserRouter>
-//       <Nav />
-//       <div className="container">
-//         <Routes>
-//           <Route path="/" element={<MainPage />} />
-//         </Routes>
-//         <Routes>
-//           <Route path="/shoes/new" element={<ShoeForm />} />
-//         </Routes>
-//       </div>
-//     </BrowserRouter>
-//   );
-// }
