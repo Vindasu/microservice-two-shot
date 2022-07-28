@@ -12,8 +12,14 @@ class HatListEncoder(ModelEncoder):
     model = Hat
     properties = [
         "id",
+        "fabric",
         "style_name",
+        "color",
+        "picture_url",
     ]
+
+    def get_extra_data(self, o):
+        return {"location": o.location.closet_name}
 
 class HatDetailEncoder(ModelEncoder):
     model = Hat
@@ -23,8 +29,10 @@ class HatDetailEncoder(ModelEncoder):
         "style_name",
         "color",
         "picture_url",
-        "location",
     ]
+
+    def get_extra_data(self, o):
+        return {"location": o.location.closet_name}
 
 @require_http_methods(["GET", "POST"])
 def api_list_hats(request, location_vo_id=None):
@@ -79,9 +87,7 @@ def api_show_hat(request, pk):
                 safe=False,
             )
         except Hat.DoesNotExist:
-            response = JsonResponse({"message": "Does not exist"})
-            response.status_code = 404
-            return response
+            return JsonResponse({"message": "Does not exist"})
     # else: # PUT
     #     try:
     #         content = json.loads(request.body)

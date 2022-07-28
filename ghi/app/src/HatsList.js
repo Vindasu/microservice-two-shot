@@ -4,6 +4,9 @@ function HatsList(props) {
         <thead>
           <tr>
             <th>Hat Fabric</th>
+            <th>Hat Style</th>
+            <th>Hat Color</th>
+            <th>Hat Picture</th>
             <th>Location</th>
           </tr>
         </thead>
@@ -12,6 +15,9 @@ function HatsList(props) {
             return (
               <tr key={hat.id}>
                 <td>{ hat.fabric }</td>
+                <td>{ hat.style_name }</td>
+                <td>{ hat.color }</td>
+                <td>{ hat.picture_url }</td>
                 <td>{ hat.location }</td>
               </tr>
             );
