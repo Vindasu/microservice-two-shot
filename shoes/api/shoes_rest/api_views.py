@@ -7,23 +7,45 @@ import json
 from common.json import ModelEncoder
 from .models import Shoe, BinVO
 
+# class ShoeListEncoder(ModelEncoder):
+#     model = Shoe
+#     properties = ["model_name"]
+
 class ShoeListEncoder(ModelEncoder):
     model = Shoe
-    properties = ["model_name"]
+    properties = [
+        "manufacturer",
+        "model_name",
+        "color",
+        "picture_url",
+    ]
 
-class BinVOEncoder(ModelEncoder):
-    model = BinVO
-    properties = ["import_href"]
-    
     def get_extra_data(self, o):
-        return {"bin": o.closet_name}
+        return {"bin": o.bin.closet_name}
+
+# class BinVOEncoder(ModelEncoder):
+#     model = BinVO
+#     properties = ["import_href"]
+    
+#     def get_extra_data(self, o):
+#         return {"bin": o.closet_name}
+
+# class ShoeDetailEncoder(ModelEncoder):
+#     model = Shoe
+#     properties = ["manufacturer", "model_name", "color", "picture_url"]
+#     encoders={"bin": BinVOEncoder}
 
 class ShoeDetailEncoder(ModelEncoder):
     model = Shoe
-    properties = ["manufacturer", "model_name", "color", "picture_url"]
-    encoders={"bin": BinVOEncoder}
+    properties = [
+        "manufacturer",
+        "model_name",
+        "color",
+        "picture_url",
+    ]
 
-
+    def get_extra_data(self, o):
+        return {"bin": o.bin.closet_name}
 
 @require_http_methods(["GET", "POST"])
 def api_list_shoes(request, bin_vo_id=None):
