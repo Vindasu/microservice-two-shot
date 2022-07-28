@@ -16,12 +16,34 @@ class HatForm extends React.Component {
         this.handleColorChange = this.handleColorChange.bind(this);
         this.handlePictureUrlChange = this.handlePictureUrlChange.bind(this);
         this.handleLocationChange = this.handleLocationChange.bind(this);
-
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    // async handleSubmit(event) {
-
-    // }
+    async handleSubmit(event) {
+        event.preventDefault();
+        const data = {...this.state};
+        delete data.locations;
+        const url = 'http://localhost:8090/api/hats_rest/';
+        const fetchConfig = {
+            method: "post",
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+        const response = await fetch(url, fetchConfig);
+        if (response.ok) {
+            const newHat = await response.json();
+            const cleared = {
+                fabric: '',
+                style_name: '',
+                color: '',
+                picture_url: '',
+                location: '',
+            };
+            this.setState(cleared);
+        }
+    }
 
     handleFabricChange(event) {
         const value = event.target.value;
@@ -45,6 +67,9 @@ class HatForm extends React.Component {
 
     handleLocationChange(event) {
         const value = event.target.value;
+        console.log("event: ", event);
+        console.log("event.target: ", event.target);
+        console.log("value: ", value);
         this.setState({location: value})
     }
 
@@ -54,7 +79,6 @@ class HatForm extends React.Component {
 
         if (response.ok) {
             const data = await response.json();
-            console.log(data)
             this.setState({locations: data.locations})
         }
     }
@@ -65,7 +89,7 @@ class HatForm extends React.Component {
             <div className="offset-3 col-6">
             <div className="shadow p-4 mt-4">
                 <h1>Create a new hat</h1>
-                <form id="create-hat-form">
+                <form onSubmit={this.handleSubmit} id="create-hat-form">
                 <div className="form-floating mb-3">
                     <input value={this.state.fabric} onChange={this.handleFabricChange} placeholder="Fabric" required type="text" name="fabric" id="fabric" className="form-control" />
                     <label htmlFor="fabric">Fabric</label>
@@ -87,7 +111,7 @@ class HatForm extends React.Component {
                     <option value="">Choose a location</option>
                     {this.state.locations.map(location => {
                         return (
-                        <option key={location.closet_name} value={location.import_href}>
+                        <option key={location.id} value={location.href}>
                             {location.closet_name}
                         </option>
                         );
