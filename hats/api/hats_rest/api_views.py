@@ -56,8 +56,8 @@ def api_list_hats(request, location_vo_id=None):
                 {"message": "Invalid location id"},
                 status=400,
             )
-        photo = get_photo(content["fabric"], content["style_name"])
-        content.update(photo)
+        # photo = get_photo(content["fabric"], content["style_name"])
+        # content.update(photo)
         hat = Hat.objects.create(**content)
         return JsonResponse(
             hat,
