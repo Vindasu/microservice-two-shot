@@ -15,6 +15,7 @@ from hats_rest.models import LocationVO
 
 def get_locations():
     response = requests.get("http://wardrobe-api:8000/api/locations/")
+    # anything can use 8000 if the service is within the same docker image?
     content = json.loads(response.content)
     for location in content["locations"]:
         LocationVO.objects.update_or_create(

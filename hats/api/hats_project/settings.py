@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-octnr2p$zuhnw6l6$k*1c$ggb_sg#awm-tv8kqj6+!-fttfo()
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "wardrobe-api"]
+ALLOWED_HOSTS = ["localhost", "hats-api"]
 
 
 # Application definition
