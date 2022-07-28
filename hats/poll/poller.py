@@ -20,6 +20,8 @@ def get_locations():
         LocationVO.objects.update_or_create(
             import_href=location["href"],
             defaults={"closet_name": location["closet_name"]},
+            # first closet name is for value object
+            # second closet name is from entity
         )
 
 def poll():
