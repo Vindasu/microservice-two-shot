@@ -6,11 +6,12 @@ Team:
 * Alex - Shoes
 
 ## Design
-
+The design of our project was relatively standard but we wanted to include the pexels API in the search on our "LIST" functions. We enabled it on the Shoe side and left it as a hard link on the Hat side. We designed the pexels search to be not incredibly specific so you get a unique image that may or may not represent your shoe perfectly (because it was more fun that way "like a surprise xmas present!"). Then we used react functions to populate data from the server -> model -> view -> nav.js -> app.js -> shoe/hat form/list and were able to get the delete function to work properly. Our next step would be to include a "are you sure" box onClick after clicking delete. 
 ## Shoes microservice
 
 Our BinVO model forms the connection to the wardrobe microservice via the native Bin model. 
 We can see below that in the poller, the service creates BinVO objects using the contents of the native BIN. It's better to use this because then the wardrobe microservice has less processing to do and only pulls a data point rather than a living/breathing function. 
+
 BinVO.objects.update_or_create(
             import_href=bin["href"],
             defaults={
