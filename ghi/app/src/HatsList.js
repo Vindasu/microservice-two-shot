@@ -1,30 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import App from './App';
 import ReactDOM from 'react-dom/client';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-    <React.StrictMode>
-    <App />
-    </React.StrictMode>
-);
-async function loadHats() {
-  const response = await fetch('http://localhost:8090/api/hats_rest/');
-  if (response.ok) {
-    const data = await response.json();
-    root.render(
-      <React.StrictMode>
-        <App hats={data.hats} />
+// const root = ReactDOM.createRoot(document.getElementById('root'));
+// root.render(
+//     <React.StrictMode>
+//     <App />
+//     </React.StrictMode>
+// );
+// async function loadHats() {
+//   const response = await fetch('http://localhost:8090/api/hats_rest/');
+//   if (response.ok) {
+//     const data = await response.json();
+//     root.render(
+//       <React.StrictMode>
+//         <App hats={data.hats} />
 
-      </React.StrictMode>
-    );
-  } else {
-    console.error(response);
-  }
-}
-loadHats();
+//       </React.StrictMode>
+//     );
+//   } else {
+//     console.error(response);
+//   }
+// }
+// loadHats();
 
-function HatsList(props) {
+function HatsList() {
+  const [hats, setHats] = useState([])
     return (
       <table className="table table-striped">
         <thead>
@@ -37,7 +38,8 @@ function HatsList(props) {
           </tr>
         </thead>
         <tbody>
-          {props.hats.map(hat => {
+          {hats.map(hat => {
+
             return (
               <tr key={hat.id}>
                 <td>{ hat.fabric }</td>

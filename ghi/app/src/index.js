@@ -11,7 +11,7 @@ root.render(
 
 // async function loadHats() {
 //   const response = await fetch('http://localhost:8090/api/hats_rest/');
-//   if (response.ok) {
+//   if (response.ok) 
 //     const data = await response.json();
 //     root.render(
 //       <React.StrictMode>
