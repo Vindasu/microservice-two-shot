@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import App from './App';
-import { useState } from 'react';
 
 // async function loadHats() {
 //   const response = await fetch('http://localhost:8090/api/hats_rest/');
