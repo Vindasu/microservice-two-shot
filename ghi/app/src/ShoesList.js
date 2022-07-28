@@ -2,21 +2,6 @@ import React, { useEffect } from 'react';
 import App from './App';
 import {useState} from 'react'
 
-// async function loadHats() {
-//   
-//   if (response.ok) {
-//     const data = await response.json();
-//     root.render(
-//       <React.StrictMode>
-//         <App hats={data.hats} />
-
-//       </React.StrictMode>
-//     );
-//   } else {
-//     console.error(response);
-//   }
-// }
-// loadHats();
 
 function ShoesList() {
     const [shoes, setShoes] = useState([])
@@ -30,6 +15,19 @@ function ShoesList() {
     useEffect(() => {
         fetchShoes()
     }, [])
+
+    function handleDelete(id) {
+        const url = `http://localhost:8080/api/shoes_rest/${id}/`
+        const fetchConfig = {method: 'DELETE'}
+        const response = fetch(url, fetchConfig)
+        setShoes(shoes.filter(
+            function(shoe) {
+                return shoe.id !== id;
+            }
+        ))
+        // find hat by id and remove from shoes array
+    }
+
 
     return (
         <table className="table table-striped">
@@ -54,7 +52,7 @@ function ShoesList() {
                     <img src={shoe.picture_url} className="" alt= "..." width="100" height="100"></img>
                     </td>
                     <td>{ shoe.bin }</td>
-                    <td>Delete</td>
+                    <td><button variant="outline-danger" onClick={() => handleDelete(shoe.id)}>Delete</button></td>
                 </tr>
                 );
             })}
